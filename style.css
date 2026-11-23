@@ -1,0 +1,155 @@
+/* Definisco le variabili globali per mantenere colori e spaziature coerenti */
+:root {
+  --bg-page: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-primary: #2563eb;
+  --accent-primary-hover: #1d4ed8;
+  --danger-bg: #fee2e2;
+  --danger-text: #b91c1c;
+  --danger-hover: #fecaca;
+  --neutral-bg: #e2e8f0;
+  --neutral-text: #1e293b;
+  --neutral-hover: #cbd5e1;
+  --border-subtle: #e2e8f0;
+  --shadow-card: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Imposto il reset di base per calcolare correttamente larghezze e spaziature */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Centro la scheda nella pagina con un margine interno sicuro dai bordi */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+/* Rendo fluido il contenitore principale generato nell'HTML */
+#app {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Stile della card principale del contatore con ampio respiro interno */
+.counter-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2.25rem;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+/* Personalizzo il titolo dell'applicazione */
+.counter-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+/* Personalizzo il riquadro che mostra il valore numerico */
+.counter-display {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  border-radius: 1rem;
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Dispongo i tre pulsanti in riga con spaziatura uniforme */
+.counter-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Stile comune a tutti i pulsanti */
+.btn {
+  flex: 1;
+  min-height: 3.1rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+/* Effetto pressione al click */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Evidenzio il focus per la navigazione da tastiera */
+.btn:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Pulsante decrementa (-) */
+.btn-decrement {
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+.btn-decrement:hover {
+  background-color: var(--danger-hover);
+}
+
+/* Pulsante reset */
+.btn-reset {
+  background-color: var(--neutral-bg);
+  color: var(--neutral-text);
+  font-size: 1rem;
+}
+
+.btn-reset:hover {
+  background-color: var(--neutral-hover);
+}
+
+/* Pulsante incrementa (+) */
+.btn-increment {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.btn-increment:hover {
+  background-color: var(--accent-primary-hover);
+}
+
+/* Adatto spaziature e dimensioni sugli schermi mobile più piccoli */
+@media (max-width: 420px) {
+  .counter-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .counter-display {
+    font-size: 3.5rem;
+  }
+
+  .counter-controls {
+    gap: 0.5rem;
+  }
+}
