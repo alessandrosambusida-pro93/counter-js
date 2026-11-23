@@ -1,6 +1,9 @@
 // Seleziono il contenitore principale presente nell'HTML
 const appContainer = document.getElementById("app");
 
+// Definisco la chiave per memorizzare il valore nel browser
+const STORAGE_KEY = "counter_valore_salvato";
+
 // Definisco la funzione dedicata esclusivamente alla creazione dinamica del DOM
 function creaInterfacciaCounter() {
   // Creo la card principale che ospiterà l'intera interfaccia
@@ -62,5 +65,70 @@ function creaInterfacciaCounter() {
   };
 }
 
+// Recupero in sicurezza l'eventuale valore salvato in precedenza nel localStorage
+function caricaValoreIniziale() {
+  const datoSalvato = localStorage.getItem(STORAGE_KEY);
+
+  if (datoSalvato === null) {
+    return 0;
+  }
+
+  const numeroConvertito = Number(datoSalvato);
+
+  if (!Number.isNaN(numeroConvertito) && numeroConvertito >= 0) {
+    return numeroConvertito;
+  }
+
+  return 0;
+}
+
 // Genero l'interfaccia all'avvio e conservo i riferimenti agli elementi DOM
 const elementiUI = creaInterfacciaCounter();
+
+// Inizializzo lo stato del contatore partendo dal valore salvato o da 0
+let conteggio = caricaValoreIniziale();
+
+// Aggiorno contemporaneamente l'interfaccia visiva e il salvataggio locale
+function aggiornaCounter() {
+  elementiUI.displayValore.textContent = String(conteggio);
+  localStorage.setItem(STORAGE_KEY, String(conteggio));
+}
+
+// Gestisco l'aumento del valore al click sul pulsante +
+function gestisciIncremento() {
+  conteggio += 1;
+  aggiornaCounter();
+}
+
+// Gestisco la diminuzione del valore impedendo di scendere sotto 0
+function gestisciDecremento() {
+  if (conteggio > 0) {
+    conteggio -= 1;
+    aggiornaCounter();
+  } else {
+    alert("Il contatore è già a 0: non è possibile scendere sotto questo valore.");
+  }
+}
+
+// Gestisco l'azzeramento del contatore previa conferma dell'utente
+function gestisciReset() {
+  if (conteggio === 0) {
+    alert("Il contatore è già impostato a 0.");
+    return;
+  }
+
+  const confermaAzzeramento = confirm("Sei sicuro di voler azzerare il contatore?");
+
+  if (confermaAzzeramento) {
+    conteggio = 0;
+    aggiornaCounter();
+  }
+}
+
+// Collego gli ascoltatori di eventi ai tre pulsanti
+elementiUI.btnIncrementa.addEventListener("click", gestisciIncremento);
+elementiUI.btnDecrementa.addEventListener("click", gestisciDecremento);
+elementiUI.btnReset.addEventListener("click", gestisciReset);
+
+// Sincronizzo subito il display con il valore iniziale caricato
+aggiornaCounter();
