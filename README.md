@@ -39,8 +39,11 @@ Ho progettato e sviluppato questa applicazione con l'obiettivo di gestire lo sta
 
 ```text
 counter-js/
-├── index.html      # Struttura base della pagina e contenitore principale
-├── style.css       # Stili, variabili CSS e layout responsive
-├── script.js       # Creazione dinamica del DOM e logica del contatore
-├── screenshot.png  # Anteprima grafica dell'applicazione
-└── README.md       # Documentazione del progetto
+├── index.html          # Struttura base della pagina e contenitore principale
+├── css/
+│   └── style.css       # Stili, variabili CSS e layout responsive
+├── js/
+│   └── script.js       # Creazione dinamica del DOM e logica del contatore
+├── img/
+│   └── screenshot.png  # Anteprima grafica dell'applicazione
+└── README.md           # Documentazione del progetto
